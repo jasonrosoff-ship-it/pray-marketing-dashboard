@@ -6,25 +6,35 @@
 export interface WeeklyUpdate {
   weekOf: string;
   quarter: string;
+
+  // The big theme / strategic frame
   objective: string;
+  objectiveTagline: string; // short reinforcement
 
-  keyResultAreas: string[];
+  // Top-line headline numbers
+  topMetrics: {
+    label: string;
+    value: string;
+    detail?: string;
+  }[];
 
+  // OKR scoreboard — how each area is tracking
+  okrs: {
+    area: string;
+    status: "on-track" | "at-risk" | "behind" | "new";
+    headline: string; // one-line summary
+    keyNumber?: string; // the big number for this area
+  }[];
+
+  // Detailed results per area
   results: {
     category: string;
     items: string[];
   }[];
 
+  // Initiatives in motion
   initiatives: {
     text: string;
-    highlight?: boolean; // for strikethrough or emphasis
-  }[];
-
-  // Top-line numbers shown as cards
-  topMetrics: {
-    label: string;
-    value: string;
-    detail?: string;
   }[];
 }
 
@@ -34,9 +44,44 @@ export interface WeeklyUpdate {
 export const currentUpdate: WeeklyUpdate = {
   weekOf: "2026-02-24",
   quarter: "Q1",
-  objective: "Drive Revenue and Reduce Expenses",
 
-  keyResultAreas: ["NRB", "Agencies", "Partnerships", "Chat"],
+  objective: "Drive Revenue and Reduce Expenses",
+  objectiveTagline:
+    "Marketing needs to drive leads and help Enterprise get/keep deals to help the company achieve profitability this quarter.",
+
+  topMetrics: [
+    { label: "Pipeline Created", value: "$3.31M", detail: "From NRB" },
+    { label: "Deals Closed", value: "$348K", detail: "At NRB Nashville" },
+    { label: "Meetings Booked", value: "185", detail: "118 sales | 20 ads | 38 LS" },
+    { label: "Leads Captured", value: "337", detail: "162 companies reached" },
+  ],
+
+  okrs: [
+    {
+      area: "NRB",
+      status: "on-track",
+      headline: "185 meetings, $3.31M pipeline, $348K closed",
+      keyNumber: "$3.31M",
+    },
+    {
+      area: "Agencies",
+      status: "on-track",
+      headline: "8 agencies connected, 78 clients, $3.93M potential pipeline",
+      keyNumber: "$3.93M",
+    },
+    {
+      area: "Partnerships",
+      status: "at-risk",
+      headline: "Pushpay 9/15 intros complete, Resi & Tebow in progress",
+      keyNumber: "9/15",
+    },
+    {
+      area: "Chat",
+      status: "new",
+      headline: "1 client live (Hope For the Heart), GTM in progress",
+      keyNumber: "1 Live",
+    },
+  ],
 
   results: [
     {
@@ -73,42 +118,13 @@ export const currentUpdate: WeeklyUpdate = {
   ],
 
   initiatives: [
-    {
-      text: "NRB: Marketing Meeting Outreach — Sent: 85,520 | Open Rate: 6.4% | Click-Through Rate: 7.31% | 6 meetings with new leads",
-    },
+    { text: "NRB: Marketing Meeting Outreach — Sent: 85,520 | Open Rate: 6.4% | Click-Through Rate: 7.31% | 6 meetings with new leads" },
     { text: "NRB: Expense audit (con't) — Booth Sponsorship $20k" },
-    {
-      text: "NRB: Daily Product Marketing — Sent: 793 | Open Rate: 99% | Click-Through Rate: 13%",
-    },
+    { text: "NRB: Daily Product Marketing — Sent: 793 | Open Rate: 99% | Click-Through Rate: 13%" },
     { text: "Agencies: Push to meet all of them at NRB (Met with 3)" },
     { text: "Partnerships: PushPay outreach (IN PROGRESS)" },
     { text: "Partnerships: Tebow Drafted referral email." },
-    {
-      text: "AI Conversations: Hope for the Heart marketing launch | Current Client outreach (Initial Email, COMPLETE) | GTM Planning",
-    },
-  ],
-
-  topMetrics: [
-    {
-      label: "Meetings Booked",
-      value: "185",
-      detail: "118 sales | 20 ads | 38 LS",
-    },
-    {
-      label: "Pipeline",
-      value: "$3.31M",
-      detail: "Potential from NRB",
-    },
-    {
-      label: "Deals Closed",
-      value: "$348K",
-      detail: "At NRB Nashville",
-    },
-    {
-      label: "Leads Captured",
-      value: "337",
-      detail: "162 companies reached",
-    },
+    { text: "AI Conversations: Hope for the Heart marketing launch | Current Client outreach (Initial Email, COMPLETE) | GTM Planning" },
   ],
 };
 
