@@ -51,10 +51,10 @@ export const currentUpdate: WeeklyUpdate = {
     "Marketing needs to drive leads and help Enterprise get/keep deals to help the company achieve profitability this quarter.",
 
   topMetrics: [
-    { label: "Pipeline Created", value: "$3.31M", detail: "From NRB" },
-    { label: "Deals Closed", value: "$348K", detail: "At NRB Nashville" },
-    { label: "Meetings Booked", value: "185", detail: "118 sales | 20 ads | 38 LS" },
-    { label: "Leads Captured", value: "337", detail: "162 companies reached" },
+    { label: "2026 Pipeline", value: "$23.6M", detail: "289 active deals" },
+    { label: "Revenue Closed", value: "$920K", detail: "30 deals won YTD" },
+    { label: "Avg Deal Size", value: "$81K", detail: "Across pipeline" },
+    { label: "Win Rate", value: "10.4%", detail: "30 of 289 deals" },
   ],
 
   okrs: [
