@@ -223,21 +223,32 @@ export default function Home() {
                 </div>
 
                 {/* Events table header */}
-                <div className="grid grid-cols-[1fr_100px_1fr_90px] px-5 pt-4 pb-2 border-b border-[#dedfe3]">
+                <div className="grid grid-cols-[1fr_90px_1fr_90px_100px] px-5 pt-4 pb-2 border-b border-[#dedfe3]">
                   <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Event</div>
                   <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Dates</div>
                   <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Location</div>
                   <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider text-right">Budget</div>
+                  <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider text-right">Proj. Return</div>
                 </div>
 
                 {u.upcomingEvents.events.map((evt, i) => (
-                  <div key={i} className={`grid grid-cols-[1fr_100px_1fr_90px] px-5 py-3 ${i < u.upcomingEvents!.events.length - 1 ? "border-b border-[#f2f3f4]" : ""}`}>
+                  <div key={i} className={`grid grid-cols-[1fr_90px_1fr_90px_100px] px-5 py-3 ${i < u.upcomingEvents!.events.length - 1 ? "border-b border-[#f2f3f4]" : ""}`}>
                     <div className="text-sm font-medium text-[#0b0c0d]">{evt.name}</div>
                     <div className="text-sm text-[#56585e]">{evt.dates}</div>
                     <div className="text-sm text-[#56585e]">{evt.location}</div>
                     <div className="text-sm font-medium text-[#0b0c0d] text-right">{evt.budget}</div>
+                    <div className={`text-sm text-right ${evt.projectedReturn === "TBD" ? "text-[#a6a8ad] italic" : "font-medium text-[#1cab5f]"}`}>{evt.projectedReturn || "—"}</div>
                   </div>
                 ))}
+
+                {/* Totals row */}
+                <div className="grid grid-cols-[1fr_90px_1fr_90px_100px] px-5 py-3 border-t border-[#dedfe3] bg-[#f2f3f4]">
+                  <div className="text-sm font-bold text-[#0b0c0d]">Total ({u.upcomingEvents.events.length} events)</div>
+                  <div></div>
+                  <div></div>
+                  <div className="text-sm font-bold text-[#0b0c0d] text-right">{u.upcomingEvents.totalBudget}</div>
+                  <div className="text-sm font-bold text-right text-[#a6a8ad] italic">TBD</div>
+                </div>
               </section>
             )}
           </div>

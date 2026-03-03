@@ -47,6 +47,7 @@ export interface WeeklyUpdate {
       dates: string;
       location: string;
       budget: string;
+      projectedReturn?: string; // expected revenue / pipeline from event
     }[];
   };
 }
@@ -149,16 +150,16 @@ export const currentUpdate: WeeklyUpdate = {
     quarter: "Q2",
     totalBudget: "$427K",
     events: [
-      { name: "America Reads the Bible", dates: "Apr 20–21", location: "Washington, D.C. — Museum of the Bible", budget: "$35,000" },
-      { name: "Black Ops Summit (1/2)", dates: "Apr 22–24", location: "San Diego, CA — The Andaz", budget: "$80,000" },
-      { name: "MegaMetro (Senior Pastors)", dates: "Apr 26–29", location: "Boston, MA — Four Seasons Hotel", budget: "$40,000" },
-      { name: "Outcomes Conference (CLA)", dates: "Apr 28–30", location: "Dallas, TX", budget: "$34,850" },
-      { name: "VIP Dinner + Astros vs. Rangers", dates: "May 15–16", location: "Houston, TX — Minute Maid Park", budget: "$30,000" },
-      { name: "America Prays National Mall Event", dates: "May 18–19", location: "Washington, D.C. — National Mall", budget: "$50,000" },
-      { name: "SBC VIP Owned Event", dates: "Jun 7–8", location: "Orlando, FL", budget: "$32,200" },
-      { name: "Rangers vs. Padres — Father's Day VIP Night", dates: "Jun 19–21", location: "Dallas, TX — Globe Life Field", budget: "$30,000" },
-      { name: "BCI (Black Christian Influencers)", dates: "Jun 25–26", location: "Chicago, IL", budget: "$15,000" },
-      { name: "Black Ops Summit (2/2)", dates: "Jun 24–26", location: "TBD", budget: "$80,000" },
+      { name: "America Reads the Bible", dates: "Apr 20–21", location: "Washington, D.C. — Museum of the Bible", budget: "$35,000", projectedReturn: "TBD" },
+      { name: "Black Ops Summit (1/2)", dates: "Apr 22–24", location: "San Diego, CA — The Andaz", budget: "$80,000", projectedReturn: "TBD" },
+      { name: "MegaMetro (Senior Pastors)", dates: "Apr 26–29", location: "Boston, MA — Four Seasons Hotel", budget: "$40,000", projectedReturn: "TBD" },
+      { name: "Outcomes Conference (CLA)", dates: "Apr 28–30", location: "Dallas, TX", budget: "$34,850", projectedReturn: "TBD" },
+      { name: "VIP Dinner + Astros vs. Rangers", dates: "TBD", location: "Houston, TX — Minute Maid Park", budget: "$30,000", projectedReturn: "TBD" },
+      { name: "America Prays National Mall Event", dates: "May 18–19", location: "Washington, D.C. — National Mall", budget: "$50,000", projectedReturn: "TBD" },
+      { name: "SBC VIP Owned Event", dates: "TBD", location: "TBD", budget: "$32,200", projectedReturn: "TBD" },
+      { name: "Rangers vs. Padres — Father's Day VIP Night", dates: "TBD", location: "Dallas, TX — Globe Life Field", budget: "$30,000", projectedReturn: "TBD" },
+      { name: "BCI (Black Christian Influencers)", dates: "Jun 25–26", location: "Chicago, IL", budget: "$15,000", projectedReturn: "TBD" },
+      { name: "Black Ops Summit (2/2)", dates: "Jun 24–26", location: "TBD", budget: "$80,000", projectedReturn: "TBD" },
     ],
   },
 };
