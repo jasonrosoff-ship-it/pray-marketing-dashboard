@@ -37,6 +37,18 @@ export interface WeeklyUpdate {
   initiatives: {
     text: string;
   }[];
+
+  // Upcoming events with budget
+  upcomingEvents?: {
+    quarter: string;
+    totalBudget: string;
+    events: {
+      name: string;
+      dates: string;
+      location: string;
+      budget: string;
+    }[];
+  };
 }
 
 // ============================================================
@@ -61,8 +73,8 @@ export const currentUpdate: WeeklyUpdate = {
     {
       area: "NRB",
       status: "on-track",
-      headline: "185 meetings, $3.31M pipeline, $348K closed",
-      keyNumber: "$3.31M",
+      headline: "200 meetings, $6M pipeline, $363K closed (3 deals)",
+      keyNumber: "$6M",
       link: "https://mktsaasevents.vercel.app/events/2026-events-calendar.html", // TODO: replace with HubSpot NRB dashboard
     },
     {
@@ -92,9 +104,10 @@ export const currentUpdate: WeeklyUpdate = {
     {
       category: "NRB",
       items: [
-        "185 Meetings Booked, involving $3.31M in potential pipeline. 118 sales | 20 ads & Others | 38 LS",
-        "337 Leads Captured and 162 Companies Reached",
-        "$348K Deals Closed at NRB",
+        "200 Meetings Booked, involving $6M in potential pipeline. 148 sales | 20 ads & Others | 38 LS",
+        "337 Leads Captured and 190 Companies Reached",
+        "$2M in new pipeline (open)",
+        "$363K Deals Closed at NRB (3 deals)",
       ],
     },
     {
@@ -131,6 +144,23 @@ export const currentUpdate: WeeklyUpdate = {
     { text: "Partnerships: Tebow Drafted referral email." },
     { text: "AI Conversations: Hope for the Heart marketing launch | Current Client outreach (Initial Email, COMPLETE) | GTM Planning" },
   ],
+
+  upcomingEvents: {
+    quarter: "Q2",
+    totalBudget: "$427K",
+    events: [
+      { name: "America Reads the Bible", dates: "Apr 20–21", location: "Washington, D.C. — Museum of the Bible", budget: "$35,000" },
+      { name: "Black Ops Summit (1/2)", dates: "Apr 22–24", location: "San Diego, CA — The Andaz", budget: "$80,000" },
+      { name: "MegaMetro (Senior Pastors)", dates: "Apr 26–29", location: "Boston, MA — Four Seasons Hotel", budget: "$40,000" },
+      { name: "Outcomes Conference (CLA)", dates: "Apr 28–30", location: "Dallas, TX", budget: "$34,850" },
+      { name: "VIP Dinner + Astros vs. Rangers", dates: "May 15–16", location: "Houston, TX — Minute Maid Park", budget: "$30,000" },
+      { name: "America Prays National Mall Event", dates: "May 18–19", location: "Washington, D.C. — National Mall", budget: "$50,000" },
+      { name: "SBC VIP Owned Event", dates: "Jun 7–8", location: "Orlando, FL", budget: "$32,200" },
+      { name: "Rangers vs. Padres — Father's Day VIP Night", dates: "Jun 19–21", location: "Dallas, TX — Globe Life Field", budget: "$30,000" },
+      { name: "BCI (Black Christian Influencers)", dates: "Jun 25–26", location: "Chicago, IL", budget: "$15,000" },
+      { name: "Black Ops Summit (2/2)", dates: "Jun 24–26", location: "TBD", budget: "$80,000" },
+    ],
+  },
 };
 
 // ============================================================

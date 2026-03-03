@@ -208,6 +208,38 @@ export default function Home() {
                 );
               })}
             </section>
+
+            {/* ── 4. Q2 EVENTS LOOK-AHEAD ── */}
+            {u.upcomingEvents && (
+              <section className="bg-white rounded-xl border border-[#dedfe3] overflow-hidden">
+                <div className="flex items-center justify-between p-5 pb-0">
+                  <div>
+                    <h2 className="text-lg font-bold text-[#0b0c0d]">{u.upcomingEvents.quarter} Events Look-Ahead</h2>
+                    <p className="text-xs text-[#71747b] mt-0.5">
+                      {u.upcomingEvents.events.length} events &middot; Total budget: <span className="font-semibold text-[#0b0c0d]">{u.upcomingEvents.totalBudget}</span>
+                    </p>
+                  </div>
+                  <CommentThread sectionId="events-lookahead" sectionTitle={`${u.upcomingEvents.quarter} Events`} />
+                </div>
+
+                {/* Events table header */}
+                <div className="grid grid-cols-[1fr_100px_1fr_90px] px-5 pt-4 pb-2 border-b border-[#dedfe3]">
+                  <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Event</div>
+                  <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Dates</div>
+                  <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Location</div>
+                  <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider text-right">Budget</div>
+                </div>
+
+                {u.upcomingEvents.events.map((evt, i) => (
+                  <div key={i} className={`grid grid-cols-[1fr_100px_1fr_90px] px-5 py-3 ${i < u.upcomingEvents!.events.length - 1 ? "border-b border-[#f2f3f4]" : ""}`}>
+                    <div className="text-sm font-medium text-[#0b0c0d]">{evt.name}</div>
+                    <div className="text-sm text-[#56585e]">{evt.dates}</div>
+                    <div className="text-sm text-[#56585e]">{evt.location}</div>
+                    <div className="text-sm font-medium text-[#0b0c0d] text-right">{evt.budget}</div>
+                  </div>
+                ))}
+              </section>
+            )}
           </div>
         )}
 
