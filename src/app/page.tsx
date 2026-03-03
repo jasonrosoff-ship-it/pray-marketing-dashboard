@@ -129,58 +129,84 @@ export default function Home() {
               </div>
             </section>
 
-            {/* ── 3. RESULTS DETAIL ── */}
-            <section className="bg-white rounded-xl border border-[#dedfe3] p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-[#0b0c0d]">Results</h2>
-                <CommentThread sectionId="results" sectionTitle="Results" />
+            {/* ── 3. INITIATIVES & RESULTS TABLE ── */}
+            <section className="bg-white rounded-xl border border-[#dedfe3] overflow-hidden">
+              <div className="flex items-center justify-between p-5 pb-0">
+                <h2 className="text-lg font-bold text-[#0b0c0d]">Initiatives &amp; Results</h2>
+                <CommentThread sectionId="results" sectionTitle="Initiatives & Results" />
               </div>
-              <div className="space-y-4">
-                {u.results.map((r, i) => (
-                  <div key={i}>
-                    <h3 className="font-semibold text-sm text-[#0b0c0d] flex items-center gap-2 mb-1.5">
-                      <span className="w-5 h-5 rounded-full bg-[#1cab5f]/10 text-[#1cab5f] text-xs flex items-center justify-center font-bold">{i + 1}</span>
-                      {r.category}
-                    </h3>
-                    <div className="ml-7 space-y-1">
+
+              {/* Table header */}
+              <div className="grid grid-cols-[160px_1fr_1fr] px-5 pt-4 pb-2 border-b border-[#dedfe3]">
+                <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Area</div>
+                <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Initiatives</div>
+                <div className="text-[10px] font-semibold text-[#71747b] uppercase tracking-wider">Results</div>
+              </div>
+
+              {/* Table rows — one per area */}
+              {u.results.map((r, i) => {
+                const okr = u.okrs.find((o) => o.area === r.category);
+                const s = okr ? statusStyle(okr.status) : statusStyle("");
+                const areaInitiatives = u.initiatives.filter((init) =>
+                  init.text.startsWith(r.category + ":") ||
+                  (r.category === "Chat" && init.text.startsWith("AI Conversations:"))
+                );
+
+                return (
+                  <div key={i} className={`grid grid-cols-[160px_1fr_1fr] px-5 py-4 ${i < u.results.length - 1 ? "border-b border-[#f2f3f4]" : ""}`}>
+                    {/* Area name + status + link */}
+                    <div className="pr-4">
+                      {okr?.link ? (
+                        <a href={okr.link} target="_blank" rel="noopener noreferrer"
+                          className="font-semibold text-sm text-[#2261d3] hover:underline flex items-center gap-1.5">
+                          {r.category}
+                          <svg className="w-3 h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        </a>
+                      ) : (
+                        <span className="font-semibold text-sm text-[#0b0c0d]">{r.category}</span>
+                      )}
+                      <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full mt-1.5 ${s.bg} ${s.text}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
+                        {s.label}
+                      </span>
+                      {okr?.keyNumber && (
+                        <div className="text-lg font-bold text-[#0b0c0d] mt-1">{okr.keyNumber}</div>
+                      )}
+                    </div>
+
+                    {/* Initiatives column */}
+                    <div className="pr-4 space-y-1.5">
+                      {areaInitiatives.length > 0 ? (
+                        areaInitiatives.map((init, j) => {
+                          const stripped = init.text.replace(/^[^:]+:\s*/, "");
+                          return (
+                            <p key={j} className="text-sm text-[#56585e] leading-relaxed">
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: stripped
+                                    .replace(
+                                      /(Sent: [\d,]+|Open Rate: [\d.]+%|Click-Through Rate: [\d.]+%)/g,
+                                      '<span class="text-[#1cab5f] font-medium">$1</span>'
+                                    ),
+                                }}
+                              />
+                            </p>
+                          );
+                        })
+                      ) : (
+                        <p className="text-sm text-[#a6a8ad] italic">—</p>
+                      )}
+                    </div>
+
+                    {/* Results column */}
+                    <div className="space-y-1.5">
                       {r.items.map((item, j) => (
-                        <p key={j} className="text-sm text-[#56585e] leading-relaxed">
-                          <span className="text-[#a6a8ad] mr-1.5">{String.fromCharCode(97 + j)}.</span>
-                          {item}
-                        </p>
+                        <p key={j} className="text-sm text-[#56585e] leading-relaxed">{item}</p>
                       ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ── 4. INITIATIVES ── */}
-            <section className="bg-white rounded-xl border border-[#dedfe3] p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-[#0b0c0d]">Initiatives</h2>
-                <CommentThread sectionId="initiatives" sectionTitle="Initiatives" />
-              </div>
-              <ol className="space-y-2.5">
-                {u.initiatives.map((init, i) => (
-                  <li key={i} className="text-sm text-[#56585e] leading-relaxed">
-                    <span className="font-semibold text-[#0b0c0d] mr-1">{i + 1}.</span>
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: init.text
-                          .replace(
-                            /\b(NRB|Agencies|Partnerships|AI Conversations):/g,
-                            '<strong class="text-[#0b0c0d]">$1:</strong>'
-                          )
-                          .replace(
-                            /(Sent: [\d,]+|Open Rate: [\d.]+%|Click-Through Rate: [\d.]+%)/g,
-                            '<span class="text-[#1cab5f] font-medium">$1</span>'
-                          ),
-                      }}
-                    />
-                  </li>
-                ))}
-              </ol>
+                );
+              })}
             </section>
           </div>
         )}

@@ -24,6 +24,7 @@ export interface WeeklyUpdate {
     status: "on-track" | "at-risk" | "behind" | "new";
     headline: string; // one-line summary
     keyNumber?: string; // the big number for this area
+    link?: string; // URL to area's detailed dashboard
   }[];
 
   // Detailed results per area
@@ -32,7 +33,7 @@ export interface WeeklyUpdate {
     items: string[];
   }[];
 
-  // Initiatives in motion
+  // Initiatives in motion, grouped by area to match results
   initiatives: {
     text: string;
   }[];
@@ -62,24 +63,28 @@ export const currentUpdate: WeeklyUpdate = {
       status: "on-track",
       headline: "185 meetings, $3.31M pipeline, $348K closed",
       keyNumber: "$3.31M",
+      link: "https://mktsaasevents.vercel.app/events/2026-events-calendar.html", // TODO: replace with HubSpot NRB dashboard
     },
     {
       area: "Agencies",
       status: "on-track",
       headline: "8 agencies connected, 78 clients, $3.93M potential pipeline",
       keyNumber: "$3.93M",
+      link: "https://mktsaasevents.vercel.app/events/2026-events-calendar.html", // TODO: replace with HubSpot Agencies dashboard
     },
     {
       area: "Partnerships",
       status: "at-risk",
       headline: "Pushpay 9/15 intros complete, Resi & Tebow in progress",
       keyNumber: "9/15",
+      link: "https://mktsaasevents.vercel.app/events/2026-events-calendar.html", // TODO: replace with Partnerships dashboard
     },
     {
       area: "Chat",
       status: "new",
       headline: "1 client live (Hope For the Heart), GTM in progress",
       keyNumber: "1 Live",
+      link: "https://mktsaasevents.vercel.app/events/2026-events-calendar.html", // TODO: replace with Chat dashboard
     },
   ],
 
